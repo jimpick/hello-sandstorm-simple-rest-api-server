@@ -23,4 +23,6 @@ cd /opt/app
 
 npm install
 
+./build.sh
+
 # bower install

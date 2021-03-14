@@ -94,6 +94,7 @@ function handleKeyText(resp) {
 }
 
 http.createServer((request, response) => {
+  console.log('Jim1 request', request.url, request.method)
   if(request.url === '/powerbox-token' && request.method === 'POST') {
     handlePowerboxToken(request, response)
   } else if(request.url === '/keytext' && request.method === 'GET') {
