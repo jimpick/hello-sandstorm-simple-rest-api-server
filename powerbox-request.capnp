@@ -4,10 +4,7 @@ using Powerbox = import "/sandstorm/powerbox.capnp";
 using ApiSession = import "/sandstorm/api-session.capnp".ApiSession;
 
 const tagValue :ApiSession.PowerboxTag = (
-  canonicalUrl = "https://api.github.com",
-  oauthScopes = [
-    (name = "read:public_key"),
-  ],
+  canonicalUrl = "https://jsonplaceholder.typicode.com/posts"
 );
 
 const descriptor :Powerbox.PowerboxDescriptor = (
