@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
       query: pbDescriptor,
       saveLabel: {defaultText: "Your GitHub account, for fetching your public key."},
     }).then((response) => {
-      console.log('Jim2 response', responst)
+      console.log('Jim2 response', response)
       return post('/powerbox-token', response.token)
     }).then(() => {
       window.location.href = '/keytext';

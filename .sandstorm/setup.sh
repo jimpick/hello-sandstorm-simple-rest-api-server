@@ -17,13 +17,20 @@ export DEBIAN_FRONTEND=noninteractive
 #echo "Installing the NodeSource Node.js 10.x repo..."
 
 apt-get update
-apt-get install -qq apt-transport-https
+apt-get install -qq apt-transport-https pkg-config
 
 #curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 # Actually install node
 #apt-get install -qq nodejs git-core g++
 apt-get install -qq git-core g++
+
+curl -O https://capnproto.org/capnproto-c++-0.8.0.tar.gz
+tar zxf capnproto-c++-0.8.0.tar.gz
+cd capnproto-c++-0.8.0
+./configure
+make -j6 check
+make install
 
 curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 apt-get install -y nodejs
