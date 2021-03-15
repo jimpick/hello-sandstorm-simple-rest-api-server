@@ -79,6 +79,9 @@ function fetchPosts() {
 }
 
 function handleFetchPosts(resp) {
+  resp.setHeader('Content-Type', 'application/json')
+  resp.end(JSON.stringify({ jim: "test" }))
+  /*
     fetchPosts()
       .then((data) => {
         resp.writeHead(200, {'content-type': 'text/plain'})
@@ -91,6 +94,7 @@ function handleFetchPosts(resp) {
         resp.write("Couldn't restore our token; try requesting one?")
         resp.end()
       })
+      */
 }
 
 http.createServer((request, response) => {

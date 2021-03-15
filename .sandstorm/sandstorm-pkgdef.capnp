@@ -1,4 +1,4 @@
-@0xfd99b3d3321cda07;
+@0xb359051ed7c14b0b;
 
 using Spk = import "/sandstorm/package.capnp";
 # This imports:
@@ -9,7 +9,7 @@ const pkgdef :Spk.PackageDefinition = (
   # The package definition. Note that the spk tool looks specifically for the
   # "pkgdef" constant.
 
-  id = "x8kqyzj3z27pu8vsevpa1zg9f7p455nfcd9a2a8f8nu6w63m3ft0",
+  id = "7v1jstmxakv76gn7ga3nu4d64w8k7jqpkux8sadj2vpr2n8s51g0",
   # Your app ID is actually its public key. The private key was placed in
   # your keyring. All updates must be signed with the same key.
 
@@ -17,7 +17,7 @@ const pkgdef :Spk.PackageDefinition = (
     # This manifest is included in your app package to tell Sandstorm
     # about your app.
 
-    appTitle = (defaultText = "Hello Simple REST API Client"),
+    appTitle = (defaultText = "Hello Simple REST API Server"),
 
     appVersion = 0,  # Increment this for every release.
 
@@ -54,10 +54,10 @@ const pkgdef :Spk.PackageDefinition = (
         #marketBig = (svg = embed "path/to/market-big-300x300.svg"),
       ),
 
-      website = "https://github.com/jimpick/hello-sandstorm-simple-rest-api-client",
+      website = "https://github.com/jimpick/hello-sandstorm-simple-rest-api-server",
       # This should be the app's main website url.
 
-      codeUrl = "https://github.com/jimpick/hello-sandstorm-simple-rest-api-client",
+      codeUrl = "https://github.com/jimpick/hello-sandstorm-simple-rest-api-server",
       # URL of the app's source code repository, e.g. a GitHub URL.
       # Required if you specify a license requiring redistributing code, but optional otherwise.
 

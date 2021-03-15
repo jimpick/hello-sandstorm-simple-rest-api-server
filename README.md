@@ -1,1 +1,1 @@
-# hello-standstorm-simple-rest-api-client
+# hello-standstorm-simple-rest-api-server
