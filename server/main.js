@@ -42,7 +42,7 @@ function handlePowerboxToken(req, resp) {
 
 let keytext = null;
 
-function fetchKeyText() {
+function fetchPosts() {
   return new Promise((resolve, reject) => {
     if(keytext !== null) {
       resolve(keytext);
@@ -65,7 +65,7 @@ function fetchKeyText() {
         //
         // It would probably still be better to use the expected host here,
         // but just to demo:
-        url: 'http://example.com/user/keys',
+        url: 'http://example.com/',
       }, (err, githubResponse, body) => {
         if(err) {
           reject(err);
@@ -78,8 +78,8 @@ function fetchKeyText() {
   })
 }
 
-function handleKeyText(resp) {
-    fetchKeyText()
+function handleFetchPosts(resp) {
+    fetchPosts()
       .then((data) => {
         resp.writeHead(200, {'content-type': 'text/plain'})
         resp.write(keytext)
@@ -97,8 +97,8 @@ http.createServer((request, response) => {
   console.log('Jim1 request', request.url, request.method)
   if(request.url === '/powerbox-token' && request.method === 'POST') {
     handlePowerboxToken(request, response)
-  } else if(request.url === '/keytext' && request.method === 'GET') {
-    handleKeyText(response)
+  } else if(request.url === '/posts' && request.method === 'GET') {
+    handleFetchPosts(response)
   } else {
     fileServer.serve(request, response);
   }

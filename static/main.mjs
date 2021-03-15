@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
       console.log('Jim2 response', response)
       return post('/powerbox-token', response.token)
     }).then(() => {
-      window.location.href = '/keytext';
+      window.location.href = '/posts';
     }).catch(err => {
       console.error('Jim3 error', err)
     })

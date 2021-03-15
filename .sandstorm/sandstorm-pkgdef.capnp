@@ -1,4 +1,4 @@
-@0xf91ce55d8e65d95e;
+@0xfd99b3d3321cda07;
 
 using Spk = import "/sandstorm/package.capnp";
 # This imports:
@@ -9,7 +9,7 @@ const pkgdef :Spk.PackageDefinition = (
   # The package definition. Note that the spk tool looks specifically for the
   # "pkgdef" constant.
 
-  id = "ykga53hvrk3v4jvufmqn7u4ngc530f3x1w0c4kzk18v60v6ant20",
+  id = "x8kqyzj3z27pu8vsevpa1zg9f7p455nfcd9a2a8f8nu6w63m3ft0",
   # Your app ID is actually its public key. The private key was placed in
   # your keyring. All updates must be signed with the same key.
 
@@ -17,7 +17,7 @@ const pkgdef :Spk.PackageDefinition = (
     # This manifest is included in your app package to tell Sandstorm
     # about your app.
 
-    appTitle = (defaultText = "Hello OAuth"),
+    appTitle = (defaultText = "Hello Simple REST API"),
 
     appVersion = 0,  # Increment this for every release.
 
@@ -54,10 +54,10 @@ const pkgdef :Spk.PackageDefinition = (
         #marketBig = (svg = embed "path/to/market-big-300x300.svg"),
       ),
 
-      website = "https://github.com/zenhack/hello-sandstorm-oauth",
+      website = "https://github.com/jimpick/hello-sandstorm-simple-rest-api",
       # This should be the app's main website url.
 
-      codeUrl = "https://github.com/zenhack/hello-sandstorm/oauth",
+      codeUrl = "https://github.com/jimpick/hello-sandstorm-simple-rest-api",
       # URL of the app's source code repository, e.g. a GitHub URL.
       # Required if you specify a license requiring redistributing code, but optional otherwise.
 
@@ -73,7 +73,7 @@ const pkgdef :Spk.PackageDefinition = (
       author = (
         # Fields relating to the author of this app.
 
-        contactEmail = "ian@zenhack.net",
+        contactEmail = "jim@jimpick.com",
         # Email address to contact for any issues with this app. This includes end-user support
         # requests as well as app store administrator requests, so it is very important that this be a
         # valid address with someone paying attention to it.
@@ -108,7 +108,7 @@ const pkgdef :Spk.PackageDefinition = (
       # in an app store. Note that the Markdown is not permitted to contain HTML nor image tags (but
       # you can include a list of screenshots separately).
 
-      shortDescription = (defaultText = "oauth demo app"),
+      shortDescription = (defaultText = "simple rest api app"),
       # A very short (one-to-three words) description of what the app does. For example,
       # "Document editor", or "Notetaking", or "Email client". This will be displayed under the app
       # title in the grid view in the app market.
