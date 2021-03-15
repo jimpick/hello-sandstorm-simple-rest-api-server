@@ -17,7 +17,7 @@ const pkgdef :Spk.PackageDefinition = (
     # This manifest is included in your app package to tell Sandstorm
     # about your app.
 
-    appTitle = (defaultText = "Hello Simple REST API"),
+    appTitle = (defaultText = "Hello Simple REST API Client"),
 
     appVersion = 0,  # Increment this for every release.
 
@@ -54,10 +54,10 @@ const pkgdef :Spk.PackageDefinition = (
         #marketBig = (svg = embed "path/to/market-big-300x300.svg"),
       ),
 
-      website = "https://github.com/jimpick/hello-sandstorm-simple-rest-api",
+      website = "https://github.com/jimpick/hello-sandstorm-simple-rest-api-client",
       # This should be the app's main website url.
 
-      codeUrl = "https://github.com/jimpick/hello-sandstorm-simple-rest-api",
+      codeUrl = "https://github.com/jimpick/hello-sandstorm-simple-rest-api-client",
       # URL of the app's source code repository, e.g. a GitHub URL.
       # Required if you specify a license requiring redistributing code, but optional otherwise.
 
