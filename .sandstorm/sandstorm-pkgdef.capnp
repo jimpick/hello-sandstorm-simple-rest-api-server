@@ -17,7 +17,7 @@ const pkgdef :Spk.PackageDefinition = (
     # This manifest is included in your app package to tell Sandstorm
     # about your app.
 
-    appTitle = (defaultText = "Hello Simple REST API Server"),
+    appTitle = (defaultText = "HelloREST Server"),
 
     appVersion = 0,  # Increment this for every release.
 
