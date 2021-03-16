@@ -276,11 +276,10 @@ opt/app/package.json
 opt/app/server
 opt/app/server/main.js
 opt/app/static
-opt/app/static/http.mjs
 opt/app/static/index.html
 opt/app/static/main.mjs
 opt/app/static/pb-descriptor.mjs
-opt/app/static/rpc.mjs
+proc
 proc/cpuinfo
 sandstorm-http-bridge
 sandstorm-http-bridge-config

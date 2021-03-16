@@ -1,122 +1,44 @@
 const http = require('http')
 const fs = require('fs')
-const request = require('request')
 const static = require('node-static')
 
 const fileServer = new static.Server('./static')
 
-// return a promise for the full body of a request.
-function getRequestBody (req) {
-  return new Promise((resolve, reject) => {
-    let body = ''
-    req.on('data', chunk => {
-      body += chunk
-    })
-    req.on('end', () => {
-      resolve(body)
-    })
-  })
-}
-
-function handlePowerboxToken (req, resp) {
-  getRequestBody(req).then(body => {
-    const sessionId = req.headers['x-sandstorm-session-id']
-    request(
-      {
-        proxy: process.env.HTTP_PROXY,
-        method: 'POST',
-        url: 'http://http-bridge/session/' + sessionId + '/claim',
-        json: {
-          requestToken: body,
-          requiredPermissions: []
-        }
-      },
-      (err, bridgeResponse, body) => {
-        if (err) {
-          resp.writeHead(500, {})
-          resp.end()
-        } else {
-          fs.promises.writeFile('/var/token', body.cap).then(() => {
-            // TODO: redirect
-            resp.writeHead(200, {})
-            resp.end()
-          })
-        }
-      }
-    )
-  })
-}
-
-let keytext = null
-
-function fetchPosts () {
-  return new Promise((resolve, reject) => {
-    if (keytext !== null) {
-      resolve(keytext)
-      return
-    }
-    return fs.promises.readFile('/var/token').then(token => {
-      request(
-        {
-          proxy: process.env.HTTP_PROXY,
-          headers: {
-            // Use sandstorm for auth:
-            Authorization: 'Bearer ' + token,
-
-            // Recommended by github docs:
-            Accept: 'application/vnd.github.v3+json'
-          },
-
-          // It doesn't matter what we put for the host part of the url;
-          // Sandstorm will replace it with whatever the user supplied via the
-          // powerbox. The 'Authorization' header decides where we go.
-          //
-          // It would probably still be better to use the expected host here,
-          // but just to demo:
-          url: 'http://example.com/'
-        },
-        (err, githubResponse, body) => {
-          if (err) {
-            reject(err)
-            return
-          }
-          keytext = body
-          resolve(keytext)
-        }
-      )
-    })
-  })
-}
-
-function handleFetchPosts (resp) {
-  resp.setHeader('Content-Type', 'application/json')
-  resp.end(JSON.stringify({ jim: 'test' }))
-  /*
-    fetchPosts()
-      .then((data) => {
-        resp.writeHead(200, {'content-type': 'text/plain'})
-        resp.write(keytext)
-        resp.end()
-      })
-      .catch((err) => {
-        console.log(err)
-        resp.writeHead(400, {'content-type': 'text/plain'})
-        resp.write("Couldn't restore our token; try requesting one?")
-        resp.end()
-      })
-      */
-}
-
 http
   .createServer((request, response) => {
     console.log('Jim1 request', request.url, request.method)
-    if (request.url === '/powerbox-token' && request.method === 'POST') {
-      handlePowerboxToken(request, response)
-    } else if (
-      (request.url === '/posts' || request.url === '/posts/') &&
-      request.method === 'GET'
-    ) {
-      handleFetchPosts(response)
+    if (request.url === '/posts' || request.url === '/posts/') {
+      if (request.method === 'GET') {
+        response.setHeader('Content-Type', 'application/json')
+        try {
+          const value = fs.readFileSync('/var/value', 'utf8')
+          response.end(JSON.stringify({ value }))
+        } catch (e) {
+          console.error('Error, returned default', e)
+          response.end(JSON.stringify({ value: 'default' }))
+        }
+      } else if (request.method === 'POST') {
+        console.log('Jim2')
+        const chunks = []
+        request.on('data', chunk => chunks.push(chunk))
+        request.on('end', () => {
+          const data = Buffer.concat(chunks)
+          console.log('Data: ', data)
+          try {
+            const json = JSON.parse(data.toString())
+            console.log('JSON: ', json)
+            fs.writeFileSync('/var/value', json.value)
+            response.end('Updated')
+          } catch (e) {
+            console.error('Error', e)
+            response.statusCode = 500
+            response.end('Exception')
+          }
+        })
+      } else {
+        response.statusCode = 404
+        response.end('Not Found')
+      }
     } else {
       fileServer.serve(request, response)
     }
